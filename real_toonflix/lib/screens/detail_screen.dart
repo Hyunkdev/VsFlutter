@@ -27,6 +27,29 @@ class DetailScreen extends StatelessWidget {
           ),
         ),
       ),
+      body: Column(
+        children: [
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Hero(
+                tag: id,
+                child: Container(
+                  clipBehavior: Clip.hardEdge,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  width: 250,
+                  child: Image.network(thumb),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

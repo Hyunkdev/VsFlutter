@@ -36,6 +36,10 @@ class HomeScreen extends StatelessWidget {
                 Expanded(
                   child: makeList(snapshot),
                 ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.favorite),
+                ),
               ],
             );
           }

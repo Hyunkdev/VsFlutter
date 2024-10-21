@@ -1,20 +1,20 @@
 import 'package:diary/screens/mainScreen.dart';
 import 'package:flutter/material.dart';
 
-class Homescreen extends StatefulWidget {
-  const Homescreen({super.key});
+class Loadscreen extends StatefulWidget {
+  const Loadscreen({super.key});
 
   @override
-  State<Homescreen> createState() => _HomescreenState();
+  State<Loadscreen> createState() => _LoadscreenState();
 }
 
-class _HomescreenState extends State<Homescreen> {
+class _LoadscreenState extends State<Loadscreen> {
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     Future.delayed(
-      const Duration(seconds: 5),
+      const Duration(seconds: 3),
       () {
         Navigator.pushReplacement(
           context,
@@ -42,44 +42,21 @@ class _HomescreenState extends State<Homescreen> {
       // ),
       body: Column(
         children: [
-          const SizedBox(
-            height: 240,
-          ),
           Expanded(
-            child: Row(
-              children: [
-                Flexible(
-                  flex: 1,
-                  child: Container(
-                    width: double.infinity, // 공간을 가득 채우도록 설정
+            child: Center(
+              child: Container(
+                alignment: Alignment.center,
+                child: const Text(
+                  '15분 일기',
+                  style: TextStyle(
+                    fontFamily: 'MyCustomFont',
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 80, // 텍스트 크기 조정
                   ),
                 ),
-                Flexible(
-                  flex: 8,
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: const Text(
-                      '15분 일기',
-                      style: TextStyle(
-                        fontFamily: 'MyCustomFont',
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 80, // 텍스트 크기 조정
-                      ),
-                    ),
-                  ),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: Container(
-                    width: double.infinity, // 공간을 가득 채우도록 설정
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 240,
           ),
         ],
       ),

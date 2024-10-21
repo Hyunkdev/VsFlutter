@@ -10,10 +10,17 @@ class Mainscreen extends StatefulWidget {
 class _MainscreenState extends State<Mainscreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Column(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('d'),
+      ),
+      body: const Column(
         children: [
-          Text('gd zz'),
+          Row(
+            children: [
+              Text('15 : 00'),
+            ],
+          ),
         ],
       ),
     );

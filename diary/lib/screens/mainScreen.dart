@@ -1,3 +1,4 @@
+import 'package:diary/screens/diaryScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -17,6 +18,7 @@ class _MainscreenState extends State<Mainscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 255, 231, 204),
       body: Column(
         children: [
           const SizedBox(
@@ -75,8 +77,14 @@ class _MainscreenState extends State<Mainscreen> {
                 setState(() {
                   _selectedDay = selectedDay;
                   _focusedDay = focusedDay;
-                  print('hk');
                 });
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Diaryscreen(selectedDay: selectedDay),
+                  ),
+                );
               },
               calendarFormat: _calendarFormat,
               onFormatChanged: (format) {

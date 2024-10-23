@@ -37,7 +37,7 @@ class _DiaryscreenState extends State<Diaryscreen> {
   Future<void> _saveDiaryEntry() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(_savedText, _controller.text); // 내용을 저장
-    _controller.clear(); // 입력 필드 초기화
+    // 입력 필드 초기화
   }
 
   @override
@@ -58,21 +58,29 @@ class _DiaryscreenState extends State<Diaryscreen> {
           ],
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const SizedBox(
-            height: 20,
-          ),
-          TextField(
-            maxLength: 50,
-            controller: _controller,
-          ),
-          ElevatedButton(
-            onPressed: _saveDiaryEntry,
-            child: const Text('저장'),
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            TextField(
+              style: const TextStyle(
+                fontFamily: 'MyCustomFont',
+                fontSize: 20,
+              ),
+              maxLines: null,
+              keyboardType: TextInputType.multiline,
+              controller: _controller,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: _saveDiaryEntry,
+              child: const Text('저장'),
+            ),
+          ],
+        ),
       ),
     );
   }

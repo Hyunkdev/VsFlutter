@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:diary/screens/diaryTextField.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,13 +18,14 @@ class Diaryscreen extends StatefulWidget {
 class _DiaryscreenState extends State<Diaryscreen> {
   final TextEditingController _controller = TextEditingController();
   String _savedText = ''; // 텍스트 저장
+  Map<String, String> diaryEntries = {}; // 날짜와 내용을 저장할 맵
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _savedText = widget.selectedDay.toIso8601String();
     _loadDiaryEntry();
+    _loadAllDiaryEntries(); // 모든 항목을 불러옴
   }
 
   Future<void> _loadDiaryEntry() async {
@@ -39,12 +39,38 @@ class _DiaryscreenState extends State<Diaryscreen> {
   Future<void> _saveDiaryEntry() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(_savedText, _controller.text); // 내용을 저장
+    _loadAllDiaryEntries(); // 저장 후 목록을 다시 불러옴
+  }
+
+  Future<void> _loadAllDiaryEntries() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      diaryEntries = prefs.getKeys().fold<Map<String, String>>({}, (map, key) {
+        String? value = prefs.getString(key);
+        if (value != null) {
+          map[key] = value;
+        }
+        return map;
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                icon: const Icon(Icons.menu), // 메뉴 버튼
+                onPressed: () {
+                  Scaffold.of(context).openEndDrawer(); // Drawer 열기
+                },
+              );
+            },
+          ),
+        ],
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -57,6 +83,27 @@ class _DiaryscreenState extends State<Diaryscreen> {
               style: const TextStyle(fontSize: 24),
             ),
           ],
+        ),
+      ),
+      // Drawer에 저장된 일기 항목을 표시
+      endDrawer: Drawer(
+        child: ListView.builder(
+          itemCount: diaryEntries.length,
+          itemBuilder: (context, index) {
+            String dateKey = diaryEntries.keys.elementAt(index);
+            String content = diaryEntries[dateKey]!;
+
+            DateTime date = DateTime.parse(dateKey);
+            String formattedDate = '${date.year}-${date.month}-${date.day}';
+            return ListTile(
+              title: Text(formattedDate), // 날짜
+              subtitle: Text(content), // 해당 날짜의 일기 내용
+              onTap: () {
+                Navigator.pop(context); // Drawer 닫기
+                // 원하는 동작을 추가 (예: 해당 일기를 편집하거나 보기)
+              },
+            );
+          },
         ),
       ),
       body: Padding(

@@ -15,7 +15,7 @@ class DiaryTextField extends StatefulWidget {
 }
 
 class _DiaryTextFieldState extends State<DiaryTextField> {
-  static const int fifteen = 20;
+  static const int fifteen = 900;
   int totalSeconds = fifteen;
   bool isRunning = true;
 
@@ -96,7 +96,7 @@ class _DiaryTextFieldState extends State<DiaryTextField> {
             ),
             color: const Color.fromARGB(255, 255, 246, 242),
           ),
-          height: 480,
+          height: 400,
           child: TextField(
             style: const TextStyle(
               fontFamily: 'MyCustomFont',

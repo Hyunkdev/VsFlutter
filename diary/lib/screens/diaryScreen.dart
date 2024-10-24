@@ -37,7 +37,6 @@ class _DiaryscreenState extends State<Diaryscreen> {
   Future<void> _saveDiaryEntry() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(_savedText, _controller.text); // 내용을 저장
-    // 입력 필드 초기화
   }
 
   @override
@@ -63,18 +62,7 @@ class _DiaryscreenState extends State<Diaryscreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            TextField(
-              style: const TextStyle(
-                fontFamily: 'MyCustomFont',
-                fontSize: 20,
-              ),
-              maxLines: null,
-              keyboardType: TextInputType.multiline,
-              controller: _controller,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-              ),
-            ),
+            DiaryTextField(controller: _controller), // 다이어리
             ElevatedButton(
               onPressed: _saveDiaryEntry,
               child: const Text('저장'),
@@ -89,5 +77,61 @@ class _DiaryscreenState extends State<Diaryscreen> {
   void dispose() {
     _controller.dispose(); // 메모리 해제를 위해 dispose
     super.dispose();
+  }
+}
+
+class DiaryTextField extends StatelessWidget {
+  const DiaryTextField({
+    super.key,
+    required TextEditingController controller,
+  }) : _controller = controller;
+
+  final TextEditingController _controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const Center(
+          child: Text(
+            '15 : 00',
+            style: TextStyle(
+              color: Colors.brown,
+              fontWeight: FontWeight.w400,
+              fontSize: 100,
+              fontFamily: 'MyCustomFont',
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 80,
+        ),
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.brown,
+            ),
+            borderRadius: BorderRadius.circular(
+              20,
+            ),
+            color: const Color.fromARGB(255, 255, 246, 242),
+          ),
+          height: 480,
+          child: TextField(
+            style: const TextStyle(
+              fontFamily: 'MyCustomFont',
+              fontSize: 20,
+            ),
+            maxLines: null,
+            keyboardType: TextInputType.multiline,
+            controller: _controller,
+            decoration: const InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.all(8),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }

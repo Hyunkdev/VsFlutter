@@ -26,11 +26,11 @@ class _MainscreenState extends State<Mainscreen> {
           ),
           const Center(
             child: Text(
-              '15 : 00',
+              '15분 일기',
               style: TextStyle(
                 color: Colors.brown,
                 fontWeight: FontWeight.w400,
-                fontSize: 120,
+                fontSize: 100,
                 fontFamily: 'MyCustomFont',
               ),
             ),

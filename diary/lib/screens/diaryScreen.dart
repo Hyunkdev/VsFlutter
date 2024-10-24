@@ -1,4 +1,6 @@
-import 'package:diary/models/diary_model.dart';
+import 'dart:async';
+
+import 'package:diary/screens/diaryTextField.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,7 +18,7 @@ class Diaryscreen extends StatefulWidget {
 
 class _DiaryscreenState extends State<Diaryscreen> {
   final TextEditingController _controller = TextEditingController();
-  String _savedText = '';
+  String _savedText = ''; // 텍스트 저장
 
   @override
   void initState() {
@@ -63,9 +65,24 @@ class _DiaryscreenState extends State<Diaryscreen> {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             DiaryTextField(controller: _controller), // 다이어리
+            const SizedBox(
+              height: 20,
+            ),
             ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: WidgetStateProperty.all(
+                    const Color.fromARGB(255, 255, 244, 212)),
+              ),
               onPressed: _saveDiaryEntry,
-              child: const Text('저장'),
+              child: const Text(
+                '저장',
+                style: TextStyle(
+                  fontFamily: 'MyCustomFont',
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.brown,
+                ),
+              ),
             ),
           ],
         ),
@@ -77,61 +94,5 @@ class _DiaryscreenState extends State<Diaryscreen> {
   void dispose() {
     _controller.dispose(); // 메모리 해제를 위해 dispose
     super.dispose();
-  }
-}
-
-class DiaryTextField extends StatelessWidget {
-  const DiaryTextField({
-    super.key,
-    required TextEditingController controller,
-  }) : _controller = controller;
-
-  final TextEditingController _controller;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Center(
-          child: Text(
-            '15 : 00',
-            style: TextStyle(
-              color: Colors.brown,
-              fontWeight: FontWeight.w400,
-              fontSize: 100,
-              fontFamily: 'MyCustomFont',
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 80,
-        ),
-        Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.brown,
-            ),
-            borderRadius: BorderRadius.circular(
-              20,
-            ),
-            color: const Color.fromARGB(255, 255, 246, 242),
-          ),
-          height: 480,
-          child: TextField(
-            style: const TextStyle(
-              fontFamily: 'MyCustomFont',
-              fontSize: 20,
-            ),
-            maxLines: null,
-            keyboardType: TextInputType.multiline,
-            controller: _controller,
-            decoration: const InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.all(8),
-            ),
-          ),
-        ),
-      ],
-    );
   }
 }

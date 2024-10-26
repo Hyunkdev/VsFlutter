@@ -3,32 +3,23 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:pokedex/models/pokemon_model.dart';
 
-// class PokeapiService {
-//   static Future<http.Response> getPokemon() => http.get(
-//         Uri.parse('https://pokeapi.co/api/v2/pokemon?limit=151'),
-//       );
-// }
-
-// void getPokemonFrom() async {
-//   PokeapiService.getPokemon().then((response) {
-//     List<Map<String, dynamic>> data =
-//         List.from(jsonDecode(response.body)['results']);
-//     if(response.statusCode == 200)
-//   });
-// }
-
 class PokeapiService {
-  static Future<PokemonModel> getPokemon() async {
-    final baseUrl = Uri.parse('https://pokeapi.co/api/v2/pokemon?limit=151');
-
-    final response = await http.get(baseUrl);
+  static Future<List<PokemonModel>> getPokemon() async {
+    final response = await http
+        .get(Uri.parse("https://pokeapi.co/api/v2/pokemon?limit=151"));
 
     if (response.statusCode == 200) {
-      Map<String, dynamic> pokemonData = jsonDecode(response.body)['result'];
+      List<Map<String, dynamic>> pokemondata =
+          List.from(jsonDecode(response.body)['results']);
 
-      return PokemonModel.fromJson(pokemonData);
+      return pokemondata.asMap().entries.map<PokemonModel>((element) {
+        element.value['id'] = element.key + 1;
+        element.value['front_default'] =
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${element.key + 1}.png";
+        return PokemonModel.fromJson(element.value);
+      }).toList();
     } else {
-      throw Exception('Failed to load pokemonData');
+      throw Exception('Fail');
     }
   }
 }

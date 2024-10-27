@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/models/pokemon_model.dart';
+import 'package:pokedex/screens/detailscreen.dart';
 
 class PokemonGrid extends StatelessWidget {
   final List<PokemonModel> pokemonList;
@@ -16,18 +17,29 @@ class PokemonGrid extends StatelessWidget {
       itemCount: pokemonList.length,
       itemBuilder: (context, index) {
         final pokemon = pokemonList[index];
-        return Card(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.network(pokemon.front_default, height: 100),
-              const SizedBox(height: 8),
-              Text(
-                pokemon.name,
-                style: const TextStyle(fontWeight: FontWeight.bold),
+
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Detailscreen(pokemon: pokemon),
               ),
-              Text('ID: ${pokemon.id}'),
-            ],
+            );
+          },
+          child: Card(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.network(pokemon.front_default, height: 100),
+                const SizedBox(height: 8),
+                Text(
+                  pokemon.name,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text('ID: ${pokemon.id}'),
+              ],
+            ),
           ),
         );
       },

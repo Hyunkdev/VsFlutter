@@ -9,40 +9,46 @@ class PokemonGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 0.75,
+    return Container(
+      decoration: const BoxDecoration(
+        color: Color.fromARGB(255, 204, 194, 231),
       ),
-      itemCount: pokemonList.length,
-      itemBuilder: (context, index) {
-        final pokemon = pokemonList[index];
+      child: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          childAspectRatio: 40 / 16,
+          crossAxisCount: 1,
+          mainAxisSpacing: 8,
+        ),
+        itemCount: pokemonList.length,
+        itemBuilder: (context, index) {
+          final pokemon = pokemonList[index];
 
-        return GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Detailscreen(pokemon: pokemon),
-              ),
-            );
-          },
-          child: Card(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.network(pokemon.front_default, height: 100),
-                const SizedBox(height: 8),
-                Text(
-                  pokemon.name,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Detailscreen(pokemon: pokemon),
                 ),
-                Text('ID: ${pokemon.id}'),
-              ],
+              );
+            },
+            child: Card(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.network(pokemon.front_default, height: 60),
+                  const SizedBox(height: 8),
+                  Text(
+                    pokemon.name,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text('ID: ${pokemon.id}'),
+                ],
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

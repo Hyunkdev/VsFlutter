@@ -55,7 +55,11 @@ class _HomescreenState extends State<Homescreen> {
                   ),
                 ),
                 BuilderWidget(
-                    future: now, check: true, width: 120, height: 120),
+                  future: now,
+                  check: true,
+                  width: 120,
+                  height: 120,
+                ),
                 const SizedBox(
                   height: 40,
                 ),
@@ -67,7 +71,11 @@ class _HomescreenState extends State<Homescreen> {
                   ),
                 ),
                 BuilderWidget(
-                    future: soon, check: true, width: 120, height: 120),
+                  future: soon,
+                  check: true,
+                  width: 120,
+                  height: 120,
+                ),
               ],
             ),
           ],

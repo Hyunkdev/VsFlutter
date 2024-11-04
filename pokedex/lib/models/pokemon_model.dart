@@ -1,10 +1,12 @@
 class PokemonModel {
   final int id;
   final String name, front_default;
+  final String species;
 
   PokemonModel.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         name = json['name'],
+        species = json['species'],
         front_default = json['front_default'];
 
   // Map<String, dynamic> toJson() => {

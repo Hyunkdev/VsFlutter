@@ -20,11 +20,13 @@ class PokeapiService {
 
         // 스페시즈 정보를 요청하여 한글 이름 가져오기
         final koreanName = await getKoreanName(id);
+        final species = await getspecies(id);
 
         // 포켓몬 모델 생성
         return PokemonModel.fromJson({
           'id': id,
           'name': koreanName ?? element.value['name'], // 한글 이름이 없으면 영어 이름 사용
+          'species': species,
           'front_default':
               "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png",
         });
@@ -46,6 +48,23 @@ class PokeapiService {
       for (var name in data['names']) {
         if (name['language']['name'] == 'ko') {
           return name['name']; // 한글 이름 반환
+        }
+      }
+    } else {
+      throw Exception('Failed to load Korean name');
+    }
+    return null; // 한글 이름이 없을 경우 null 반환
+  }
+
+  static Future<String?> getspecies(int id) async {
+    final response = await http
+        .get(Uri.parse("https://pokeapi.co/api/v2/pokemon-species/$id"));
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+
+      for (var kosp in data['flavor_text_entries']) {
+        if (kosp['language']['name'] == 'ko') {
+          return kosp['flavor_text'];
         }
       }
     } else {

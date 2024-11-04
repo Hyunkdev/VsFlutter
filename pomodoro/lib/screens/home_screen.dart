@@ -95,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onPressed: restratPressed,
                     icon: const Icon(Icons.restart_alt_rounded),
                   ),
-                )
+                ),
               ],
             ),
           ),

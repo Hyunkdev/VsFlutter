@@ -13,8 +13,10 @@ class _HomescreenState extends State<Homescreen> {
   late int time = 0;
   late int totalSeconds = time;
   bool isRunning = false;
+  bool isResting = false;
 
   int rounds = 0;
+  int goals = 0;
 
   late Timer timer;
 
@@ -25,10 +27,19 @@ class _HomescreenState extends State<Homescreen> {
         isRunning = false;
         totalSeconds = time;
       });
+
       timer.cancel();
     } else {
       setState(() {
         totalSeconds = totalSeconds - 1;
+      });
+    }
+    if (rounds == 4) {
+      setState(() {
+        rounds = 0;
+        goals = goals + 1;
+        totalSeconds = 300;
+        isResting = true;
       });
     }
   }
@@ -54,8 +65,15 @@ class _HomescreenState extends State<Homescreen> {
     timer.cancel();
     setState(() {
       isRunning = false;
+      isResting = false;
       totalSeconds = time;
     });
+  }
+
+  String format(int seconds) {
+    var duration = Duration(seconds: seconds);
+
+    return duration.toString().split(".").first.substring(2, 7);
   }
 
   @override
@@ -77,11 +95,23 @@ class _HomescreenState extends State<Homescreen> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
+            SizedBox(
+                height: 160,
+                child: isResting
+                    ? const Text(
+                        '휴식시간',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                        ),
+                      )
+                    : null),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '$totalSeconds',
+                  format(totalSeconds),
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 80,
@@ -98,6 +128,9 @@ class _HomescreenState extends State<Homescreen> {
                 )
               ],
             ),
+            const SizedBox(
+              height: 60,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -112,6 +145,7 @@ class _HomescreenState extends State<Homescreen> {
                     '15',
                     style: TextStyle(
                       color: Colors.white,
+                      fontSize: 24,
                     ),
                   ),
                 ),
@@ -129,6 +163,7 @@ class _HomescreenState extends State<Homescreen> {
                     '20',
                     style: TextStyle(
                       color: Colors.white,
+                      fontSize: 24,
                     ),
                   ),
                 ),
@@ -146,6 +181,7 @@ class _HomescreenState extends State<Homescreen> {
                     '25',
                     style: TextStyle(
                       color: Colors.white,
+                      fontSize: 24,
                     ),
                   ),
                 ),
@@ -163,6 +199,7 @@ class _HomescreenState extends State<Homescreen> {
                     '30',
                     style: TextStyle(
                       color: Colors.white,
+                      fontSize: 24,
                     ),
                   ),
                 ),
@@ -180,11 +217,15 @@ class _HomescreenState extends State<Homescreen> {
                     '35',
                     style: TextStyle(
                       color: Colors.white,
+                      fontSize: 24,
                     ),
                   ),
                 ),
               ],
             ), //gesture
+            const SizedBox(
+              height: 80,
+            ),
             Center(
               child: IconButton(
                 iconSize: 120,
@@ -193,6 +234,58 @@ class _HomescreenState extends State<Homescreen> {
                 icon: Icon(isRunning
                     ? Icons.pause_circle_outline
                     : Icons.play_circle_outline),
+              ),
+            ),
+            const SizedBox(
+              height: 60,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 80,
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '$rounds / 4',
+                        style: TextStyle(
+                          fontSize: 28,
+                          color: Colors.white.withOpacity(0.7),
+                        ),
+                      ),
+                      Text(
+                        '$goals / 12',
+                        style: TextStyle(
+                          fontSize: 28,
+                          color: Colors.white.withOpacity(0.7),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        ' ROUND',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Text(
+                        ' GOAL    ',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ],

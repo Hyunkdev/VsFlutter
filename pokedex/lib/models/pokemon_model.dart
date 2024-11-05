@@ -2,16 +2,20 @@ class PokemonModel {
   final int id;
   final String name, front_default;
   final String species;
+  final List<PokemonType> types;
 
   PokemonModel.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         name = json['name'],
         species = json['species'],
-        front_default = json['front_default'];
+        front_default = json['front_default'],
+        types = (json['types'] as List)
+            .map((typeJson) => PokemonType.fromJson(typeJson))
+            .toList();
+}
 
-  // Map<String, dynamic> toJson() => {
-  //       'id': id,
-  //       'name': name,
-  //       'front_default': front_default,
-  //     };
+class PokemonType {
+  final String name;
+
+  PokemonType.fromJson(String json) : name = json;
 }

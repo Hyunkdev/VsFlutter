@@ -22,7 +22,7 @@ class PokeapiService {
         final koreanName = await getKoreanName(id);
         final species = await getspecies(id);
         final types = await getTypes(id);
-        print(types);
+        final color = await getColor(id);
 
         // 포켓몬 모델 생성
         return PokemonModel.fromJson({
@@ -30,6 +30,7 @@ class PokeapiService {
           'name': koreanName ?? element.value['name'], // 한글 이름이 없으면 영어 이름 사용
           'species': species,
           'types': types,
+          'color': color,
           'front_default':
               "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png",
         });
@@ -74,6 +75,18 @@ class PokeapiService {
       throw Exception('Failed to load Korean name');
     }
     return null; // 한글 이름이 없을 경우 null 반환
+  }
+
+  static Future<String?> getColor(int id) async {
+    final response = await http
+        .get(Uri.parse("https://pokeapi.co/api/v2/pokemon-species/$id"));
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+
+      return data['color']['name'];
+    } else {
+      return 'black';
+    }
   }
 
   static Future<List> getTypes(int id) async {

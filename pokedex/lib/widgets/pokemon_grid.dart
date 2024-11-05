@@ -3,6 +3,33 @@ import 'package:pokedex/models/pokemon_model.dart';
 import 'package:pokedex/screens/detailscreen.dart';
 
 class PokemonGrid extends StatelessWidget {
+  Color getColorFromString(String color) {
+    switch (color.toLowerCase()) {
+      case 'black':
+        return Colors.black;
+      case 'red':
+        return Colors.red;
+      case 'green':
+        return Colors.green;
+      case 'blue':
+        return Colors.blue;
+      case 'yellow':
+        return Colors.yellow;
+      case 'white':
+        return Colors.white;
+      case 'purple':
+        return const Color.fromARGB(255, 206, 120, 221);
+      case 'pink':
+        return const Color.fromARGB(255, 248, 168, 195);
+      case 'brown':
+        return Colors.brown;
+      case 'gray':
+        return Colors.grey;
+      default:
+        return Colors.black; // 기본 색상 설정 (혹은 다른 색상)
+    }
+  }
+
   final List<PokemonModel> pokemonList;
 
   const PokemonGrid({super.key, required this.pokemonList});
@@ -35,6 +62,7 @@ class PokemonGrid extends StatelessWidget {
                 );
               },
               child: Card(
+                color: getColorFromString(pokemon.color),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -42,9 +70,21 @@ class PokemonGrid extends StatelessWidget {
                     const SizedBox(height: 8),
                     Text(
                       pokemon.name,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: pokemon.color == 'black'
+                            ? Colors.white
+                            : Colors.black,
+                      ),
                     ),
-                    Text('No.${pokemon.id}'),
+                    Text(
+                      'No.${pokemon.id}',
+                      style: TextStyle(
+                        color: pokemon.color == 'black'
+                            ? Colors.white
+                            : Colors.black,
+                      ),
+                    ),
                   ],
                 ),
               ),

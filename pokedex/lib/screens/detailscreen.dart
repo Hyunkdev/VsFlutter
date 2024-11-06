@@ -5,6 +5,33 @@ import 'package:pokedex/services/pokeapi_service.dart';
 class Detailscreen extends StatelessWidget {
   const Detailscreen({super.key, required this.pokemon});
 
+  Color getColorFromString(String color) {
+    switch (color.toLowerCase()) {
+      case 'black':
+        return Colors.black;
+      case 'red':
+        return Colors.red;
+      case 'green':
+        return Colors.green;
+      case 'blue':
+        return Colors.blue;
+      case 'yellow':
+        return Colors.yellow;
+      case 'white':
+        return const Color.fromARGB(127, 255, 255, 255);
+      case 'purple':
+        return const Color.fromARGB(255, 206, 120, 221);
+      case 'pink':
+        return const Color.fromARGB(255, 248, 168, 195);
+      case 'brown':
+        return Colors.brown;
+      case 'gray':
+        return Colors.grey;
+      default:
+        return Colors.black; // 기본 색상 설정 (혹은 다른 색상)
+    }
+  }
+
   final PokemonModel pokemon;
 
   @override
@@ -63,7 +90,28 @@ class Detailscreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Text(pokemon.types[0].name),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      width: 90,
+                      height: 32,
+                      decoration: BoxDecoration(
+                        color: pokemon.color == 'white'
+                            ? getColorFromString('black')
+                            : getColorFromString(pokemon.color),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Text(
+                        pokemon.types[0].name,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

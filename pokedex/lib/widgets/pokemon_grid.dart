@@ -16,7 +16,7 @@ class PokemonGrid extends StatelessWidget {
       case 'yellow':
         return Colors.yellow;
       case 'white':
-        return Colors.white;
+        return const Color.fromARGB(127, 255, 255, 255);
       case 'purple':
         return const Color.fromARGB(255, 206, 120, 221);
       case 'pink':

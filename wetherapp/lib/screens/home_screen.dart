@@ -65,7 +65,7 @@ class HomeScreen extends StatelessWidget {
                       Image.asset('assets/4.png'),
                       const Center(
                         child: Text(
-                          '21c',
+                          '2°C',
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 40,
@@ -102,15 +102,153 @@ class HomeScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Image.asset(
-                            'assets/11.png',
-                            scale: 8,
+                          Row(
+                            children: [
+                              Image.asset(
+                                'assets/11.png',
+                                scale: 8,
+                              ),
+                              const SizedBox(
+                                width: 4,
+                              ),
+                              const Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Sunrise',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text(
+                                    '5:30 am',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
                           ),
-                          const SizedBox(
-                            width: 4,
+                          Row(
+                            children: [
+                              Image.asset(
+                                'assets/12.png',
+                                scale: 8,
+                              ),
+                              const SizedBox(
+                                width: 4,
+                              ),
+                              const Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Sunset',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text(
+                                    '5:30 pm',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
                           ),
                         ],
-                      )
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 5,
+                        ),
+                        child: Divider(
+                          color: Colors.grey,
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Image.asset(
+                                'assets/13.png',
+                                scale: 8,
+                              ),
+                              const SizedBox(
+                                width: 4,
+                              ),
+                              const Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '최고 기온',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text(
+                                    '20°C',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Image.asset(
+                                'assets/14.png',
+                                scale: 8,
+                              ),
+                              const SizedBox(
+                                width: 4,
+                              ),
+                              const Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '최저 기온',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text(
+                                    '4°C',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 )

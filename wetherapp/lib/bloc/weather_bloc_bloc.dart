@@ -14,10 +14,7 @@ class WeatherBlocBloc extends Bloc<WeatherBlocEvent, WeatherBlocState> {
       try {
         WeatherFactory wf = WeatherFactory(API_KEY, language: Language.KOREAN);
 
-        Weather weather = await wf.currentWeatherByLocation(
-          event.position.latitude,
-          event.position.longitude,
-        );
+        Weather weather = await wf.currentWeatherByCityName("Daejeon");
         print(weather);
         emit(WeatherBlocSuccess(weather));
       } catch (e) {

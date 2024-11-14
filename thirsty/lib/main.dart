@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:thirsty/provider/countprovider.dart';
 import 'package:thirsty/screens/homescreen.dart';
 
 void main() {
@@ -10,9 +12,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Homescreen(),
+      home: ChangeNotifierProvider(
+        create: (BuildContext context) => Countprovider(),
+        child: Homescreen(),
+      ),
     );
   }
 }

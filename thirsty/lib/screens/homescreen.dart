@@ -8,7 +8,8 @@ class Homescreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _countprovider = Provider.of<Countprovider>(context);
+    print("build called");
+    _countprovider = Provider.of<Countprovider>(context, listen: false);
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 97, 155, 255),
       body: Padding(
@@ -39,11 +40,19 @@ class Homescreen extends StatelessWidget {
                   scale: 1.4,
                 ),
               ),
-              Text(
-                Provider.of<Countprovider>(context).count.toString(),
-              ),
-              Text(
-                'Grade : ${Provider.of<Countprovider>(context).grade.toString()}',
+              Consumer<Countprovider>(
+                builder: (context, provider, child) {
+                  return Column(
+                    children: [
+                      Text(
+                        provider.count.toString(),
+                      ),
+                      Text(
+                        'Grade : ${provider.grade.toString()}',
+                      ),
+                    ],
+                  );
+                },
               ),
             ],
           ),

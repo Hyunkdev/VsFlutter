@@ -21,24 +21,36 @@ class Homescreen extends StatelessWidget {
               const SizedBox(
                 height: 80,
               ),
-              const Text(
-                '목말라..',
-                style: TextStyle(
-                  fontSize: 40,
-                ),
+              Consumer<Countprovider>(
+                builder: (context, provider, child) {
+                  return Text(
+                    provider.check.toString() == 'true'
+                        ? '휴.. 살것같군..'
+                        : '목말라..',
+                    style: const TextStyle(
+                      fontSize: 40,
+                    ),
+                  );
+                },
               ),
               const SizedBox(
                 height: 60,
               ),
-              InkWell(
-                onTap: () {
-                  _countprovider.add();
+              Consumer<Countprovider>(
+                builder: (context, provider, child) {
+                  return InkWell(
+                    onTap: () {
+                      _countprovider.add();
+                    },
+                    //<a href="https://www.flaticon.com/kr/free-icons/-" title="물기 없는 아이콘">물기 없는 아이콘 제작자: amonrat rungreangfangsai - Flaticon</a>
+                    child: Image.asset(
+                      provider.check.toString() == 'false'
+                          ? 'assets/thirsty.png'
+                          : 'assets/no_thirsty.png',
+                      scale: 1.4,
+                    ),
+                  );
                 },
-                //<a href="https://www.flaticon.com/kr/free-icons/-" title="물기 없는 아이콘">물기 없는 아이콘 제작자: amonrat rungreangfangsai - Flaticon</a>
-                child: Image.asset(
-                  'assets/thirsty.png',
-                  scale: 1.4,
-                ),
               ),
               Consumer<Countprovider>(
                 builder: (context, provider, child) {
@@ -47,9 +59,7 @@ class Homescreen extends StatelessWidget {
                       Text(
                         provider.count.toString(),
                       ),
-                      Text(
-                        'Grade : ${provider.grade.toString()}',
-                      ),
+                      Text('남은 횟수 : ${provider.grade.toString()} / 3'),
                     ],
                   );
                 },

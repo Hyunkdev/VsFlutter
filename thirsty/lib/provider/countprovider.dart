@@ -10,6 +10,7 @@ class Countprovider extends ChangeNotifier {
 
   add() {
     _count++;
+    _check = false;
 
     if (_count == 20) {
       _count = 0;

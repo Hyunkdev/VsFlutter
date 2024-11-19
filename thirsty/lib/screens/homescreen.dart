@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:thirsty/provider/bottom_nav_provider.dart';
 import 'package:thirsty/provider/countprovider.dart';
+import 'package:thirsty/widgets/collectionswidget.dart';
 import 'package:thirsty/widgets/mainscreenwidget.dart';
 
 class Homescreen extends StatelessWidget {
@@ -15,7 +16,7 @@ class Homescreen extends StatelessWidget {
         return Mainscreenwidget();
 
       case 1:
-        break;
+        return Collectionswidget();
     }
     return Container();
   }

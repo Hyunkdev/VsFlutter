@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:thirsty/provider/bottom_nav_provider.dart';
 import 'package:thirsty/provider/countprovider.dart';
+import 'package:thirsty/provider/griditemprovider.dart';
 import 'package:thirsty/screens/homescreen.dart';
 
 void main() {
@@ -21,6 +22,8 @@ class MyApp extends StatelessWidget {
               create: (BuildContext context) => Countprovider()),
           ChangeNotifierProvider(
               create: (BuildContext context) => BottomNavProvider()),
+          ChangeNotifierProvider(
+              create: (BuildContext context) => GridItemProvider()),
         ],
         child: Homescreen(),
       ),

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:thirsty/provider/griditemprovider.dart';
 
 class Collectionswidget extends StatelessWidget {
-  final List<int> items = List.generate(20, (index) => index);
+  final List<int> items = List.generate(5, (index) => index);
 
   Collectionswidget({super.key});
 
@@ -35,11 +35,11 @@ class Collectionswidget extends StatelessWidget {
                         color: isSelected ? Colors.blue : Colors.grey,
                         borderRadius: BorderRadius.circular(8.0),
                       ),
-                      child: Center(
-                        child: Text(
-                          'Item ${items[index]}',
-                          style: const TextStyle(color: Colors.white),
-                        ),
+                      child: Image.asset(
+                        provider.images[index % provider.images.length],
+                        fit: BoxFit.cover,
+                        height: 50,
+                        width: 50,
                       ),
                     ),
                   );

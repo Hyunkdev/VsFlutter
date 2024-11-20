@@ -40,7 +40,7 @@ class Mainscreenwidget extends StatelessWidget {
                 builder: (context, provider, child) {
                   return InkWell(
                     onTap: () {
-                      _countprovider.add();
+                      _countprovider.add(context);
                     },
                     //<a href="https://www.flaticon.com/kr/free-icons/-" title="물기 없는 아이콘">물기 없는 아이콘 제작자: amonrat rungreangfangsai - Flaticon</a>
                     child: Image.asset(

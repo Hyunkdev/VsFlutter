@@ -25,21 +25,26 @@ class Collectionswidget extends StatelessWidget {
                 ),
                 itemCount: items.length,
                 itemBuilder: (context, index) {
-                  final isSelected =
-                      provider.selectedItems.contains(items[index]);
+                  provider.selectedItems.contains(items[index]);
                   return GestureDetector(
-                    onTap: () => provider.toggleSelection(items[index]),
+                    onTap: () {},
                     child: Container(
                       margin: const EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
-                        color: isSelected ? Colors.blue : Colors.grey,
+                        border: Border.all(width: 2),
+                        color: const Color.fromARGB(255, 97, 155, 255),
                         borderRadius: BorderRadius.circular(8.0),
                       ),
-                      child: Image.asset(
-                        provider.images[index % provider.images.length],
-                        fit: BoxFit.cover,
-                        height: 50,
-                        width: 50,
+                      child: Padding(
+                        padding: const EdgeInsets.all(4),
+                        child: Image.asset(
+                          provider.images.length > index // 인덱스 범위 체크
+                              ? provider.images[index]
+                              : 'assets/q.png', // <a href="https://www.flaticon.com/kr/free-icons/" title="물음표 아이콘">물음표 아이콘 제작자: Freepik - Flaticon</a>
+                          fit: BoxFit.cover,
+                          height: 50,
+                          width: 50,
+                        ),
                       ),
                     ),
                   );

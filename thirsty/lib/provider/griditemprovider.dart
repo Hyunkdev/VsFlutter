@@ -13,15 +13,6 @@ class GridItemProvider with ChangeNotifier {
   List<int> get selectedItems => _selectedItems;
   List<String> get images => _images;
 
-  void toggleSelection(int item) {
-    if (_selectedItems.contains(item)) {
-      _selectedItems.remove(item);
-    } else {
-      _selectedItems.add(item);
-    }
-    notifyListeners();
-  }
-
   void addImage(String imagePath) {
     _images.add(imagePath);
     notifyListeners();

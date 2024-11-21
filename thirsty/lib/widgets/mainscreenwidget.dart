@@ -39,8 +39,8 @@ class Mainscreenwidget extends StatelessWidget {
               Consumer<Countprovider>(
                 builder: (context, provider, child) {
                   return InkWell(
-                    onTap: () {
-                      _countprovider.add(context);
+                    onTap: () async {
+                      await _countprovider.add(context);
                     },
                     //<a href="https://www.flaticon.com/kr/free-icons/-" title="물기 없는 아이콘">물기 없는 아이콘 제작자: amonrat rungreangfangsai - Flaticon</a>
                     child: Image.asset(
@@ -60,6 +60,9 @@ class Mainscreenwidget extends StatelessWidget {
                         provider.count.toString(),
                       ),
                       Text('남은 횟수 : ${provider.grade.toString()} / 3'),
+                      provider.check == true
+                          ? const Text('새로운 음료 발견 !')
+                          : const SizedBox.shrink(),
                     ],
                   );
                 },
